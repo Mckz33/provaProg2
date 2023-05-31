@@ -95,6 +95,10 @@ public class ContatoService {
                 String endereco = rs.getString("endereco");
 
                 Contato contato = new Contato();
+                contato.setNome(nome);
+                contato.setEmail(email);
+                contato.setEndereco(endereco);
+                
                 contatos.add(contato);
             }
 
