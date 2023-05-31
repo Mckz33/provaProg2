@@ -26,7 +26,7 @@ public class ContatoService {
 		stmt.execute();
 		stmt.close();
 		System.out.println("Inserido com sucesso!");
-		this.con.close();
+		con.close();
 	}
 	
 	public void delete(Integer id) throws SQLException {
@@ -34,23 +34,29 @@ public class ContatoService {
 		PreparedStatement stmt =  con.prepareStatement(sql);
 		stmt.setInt(1, id);
 		stmt.execute();
-		stmt.close();
 		System.out.println("Deletado com sucesso!");
+		stmt.close();
 		con.close();
 	}
 	
-	public Boolean exists(int id) throws SQLException {
+	public Boolean exists(int id) {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
         String sql = "SELECT * FROM contatos WHERE id = ?";
-        stmt = con.prepareStatement(sql);
-        stmt.setInt(1, id);
-        rs = stmt.executeQuery();
-        
-        if (rs.next()) {
-			return true;
+        try {
+			stmt = con.prepareStatement(sql);
+	        stmt.setInt(1, id);
+	        rs = stmt.executeQuery();
+	        
+	        if (rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
         return null;
 	}
 	
@@ -65,8 +71,7 @@ public class ContatoService {
             stmt.setString(3, novoEndereco);
             stmt.setInt(4, id);
 
-            int linhasAfetadas = stmt.executeUpdate();
-
+            int linhasAfetadas = stmt.executeUpdate();            
             return linhasAfetadas > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,7 +102,7 @@ public class ContatoService {
                 
                 contatos.add(contato);
             }
-
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -126,10 +131,9 @@ public class ContatoService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
         stmt.close();
         rs.close();
-        this.con.close();
+        con.close();
 		return contato;
         
     }

@@ -6,7 +6,7 @@ import java.util.Scanner;
 import model.Contato;
 import service.ContatoService;
 
-public class CriarPorIdTeste {
+public class CriarTeste {
 
 	public static void main(String[] args) {
 		Contato contato = new Contato();
