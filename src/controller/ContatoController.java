@@ -38,7 +38,6 @@ public class ContatoController {
 	}
 
 	public static void delete() {
-		Contato contato = new Contato();
 		try (Scanner input = new Scanner(System.in)) {
 			System.out.print("Digite o ID para excluir: ");
 			Integer id = input.nextInt();
@@ -155,5 +154,4 @@ public class ContatoController {
 			e.printStackTrace();
 		}
 	}
-
 }

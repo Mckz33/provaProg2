@@ -42,7 +42,6 @@ public class ContatoService {
 	public Boolean exists(int id) throws SQLException {
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Contato contato = null;
         
         String sql = "SELECT * FROM contatos WHERE id = ?";
         stmt = con.prepareStatement(sql);
@@ -57,9 +56,7 @@ public class ContatoService {
 	
 	public boolean update(int id, String novoNome, String novoEmail, String novoEndereco) throws SQLException {
         PreparedStatement stmt = null;
-        ResultSet rs = null;
-        Contato contato = null;
-
+        
         try {
             String sql = "UPDATE contatos SET nome = ?, email = ?, endereco = ? WHERE id = ?";
             stmt = con.prepareStatement(sql);
@@ -89,7 +86,6 @@ public class ContatoService {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                int id = rs.getInt("id");
                 String nome = rs.getString("nome");
                 String email = rs.getString("email");
                 String endereco = rs.getString("endereco");
